@@ -1253,7 +1253,8 @@ model ResponseCreateParams {
 
   /** Input data to invoke the hosted agent. This feature is in preview. */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: values are user-provided input forwarded to the hosted agent, whose schema is not defined by this API."
-  @added(Versions.v2026_04_10)
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent; values are not limited to strings."
+  @added(Versions.v2026_06_01_preview)
   invoke_input?: Record<unknown>;
 }
 
@@ -1701,7 +1702,8 @@ model ServerEventResponseAudioTranscriptAnnotationAdded extends ServerEvent {
 /** Returned when a hosted agent invocation produces a non-speech SSE event, passed through as-is. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: delta contains raw SSE event JSON from the hosted agent, whose schema is not defined by this API."
-@added(Versions.v2026_04_10)
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent SSE event; values are not limited to strings."
+@added(Versions.v2026_06_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseInvocationDelta extends ServerEvent {
   /** The event type, must be `response.invocation.delta`. */
